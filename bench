@@ -1,0 +1,42 @@
+#!/bin/bash
+echo "test;time(sec)" >> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "0-no-cache-naive;%e" php -d opcache.enable=0 0-naive.php 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "0-no-jit-naive;%e" php -d opcache.jit=disable 0-naive.php 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "0-naive;%e" php 0-naive.php 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "1-fgetcsv-remove;%e" php 1-fgetcsv-remove.php 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "2-references;%e" php 2-references.php 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "3-only-one-comparison;%e" php 3-only-one-comparison.php 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "4-typecast;%e" php 4-typecast.php 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "5-fixed-length;%e" php 5-fixed-length.php 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "6-use-explode;%e" php 6-use-explode.php 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "7-own-extension;%e" php 7-own-extension.php 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "paralel5;%e" php paralel.php 5 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "paralel10;%e" php paralel.php 10 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "paralel20;%e" php paralel.php 20 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "paralel50;%e" php paralel.php 50 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "paralel200;%e" php paralel.php 200 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "naive-paralel5;%e" php naive-paralel.php 5 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "naive-paralel10;%e" php naive-paralel.php 10 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "naive-paralel20;%e" php naive-paralel.php 20 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "naive-paralel50;%e" php naive-paralel.php 50 2>> result.csv
+echo 3 | tee /proc/sys/vm/drop_caches
+/usr/bin/time -f "naive-paralel200;%e" php naive-paralel.php 200 2>> result.csv

@@ -1,0 +1,7 @@
+ARG_ENABLE('fastfileloader', 'fastfileloader support', 'no');
+
+if (PHP_FASTFILELOADER != 'no') {
+	AC_DEFINE('HAVE_FASTFILELOADER', 1, 'fastfileloader support enabled');
+
+	EXTENSION('fastfileloader', 'fastfileloader.c', null, '/DZEND_ENABLE_STATIC_TSRMLS_CACHE=1');
+}
